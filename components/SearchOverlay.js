@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { NewsData, AdminConfig } from '../data';
+import Image from 'next/image';
+const { NewsData, AdminConfig } = require('../lib/data');
 
 const STORAGE_KEY = 'dd_recent_searches';
 const MAX_RECENT = 5;
@@ -193,7 +194,7 @@ export default function SearchOverlay({ isOpen, onClose }) {
                         onClick={() => handleResultClick(article.id)}
                         className="w-full flex items-center gap-3 p-2 hover:bg-slate-50 transition-colors text-left"
                       >
-                        <img src={article.image} alt="" className="w-14 h-10 object-cover shrink-0" />
+                        <Image src={article.image} alt="" width={56} height={40} className="w-14 h-10 object-cover shrink-0" />
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-slate-800 truncate">{article.title}</p>
                           <p className="text-[10px] text-slate-400 uppercase font-bold tracking-wide">{article.tag}</p>
@@ -215,7 +216,7 @@ export default function SearchOverlay({ isOpen, onClose }) {
                     onClick={() => handleResultClick(article.id)}
                     className="w-full flex items-center gap-3 p-2 hover:bg-slate-50 transition-colors text-left animate-fadeIn"
                   >
-                    <img src={article.image} alt="" className="w-14 h-10 object-cover shrink-0" />
+                    <Image src={article.image} alt="" width={56} height={40} className="w-14 h-10 object-cover shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-slate-800 line-clamp-2">{article.title}</p>
                       <p className="text-[10px] text-slate-400 uppercase font-bold tracking-wide">{article.tag} • {article.date}</p>

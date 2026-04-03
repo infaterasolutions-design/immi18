@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { NewsData } from '../../data';
+import Image from 'next/image';
+const { NewsData } = require('../../lib/data');
 
 export default function ArticlePage({ article, relatedArticles }) {
   if (!article) {
@@ -42,7 +43,7 @@ export default function ArticlePage({ article, relatedArticles }) {
 
         {/* Hero Image */}
         <div className="mb-10">
-          <img src={article.image} alt={article.title} className="w-full h-auto max-h-[500px] object-cover" />
+          <Image src={article.image} alt={article.title} width={1024} height={500} priority className="w-full h-auto max-h-[500px] object-cover" />
         </div>
 
         {/* Article Body */}
@@ -58,7 +59,7 @@ export default function ArticlePage({ article, relatedArticles }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedArticles.map((related) => (
                 <Link key={related.id} href={`/article/${related.id}`} className="group flex gap-4 pb-4 border-b border-slate-100">
-                  <img src={related.image} alt="" className="w-28 h-20 object-cover shrink-0" />
+                  <Image src={related.image} alt="" width={112} height={80} className="w-28 h-20 object-cover shrink-0" />
                   <div>
                     <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{related.tag}</span>
                     <h3 className="text-base font-bold headline-font group-hover:text-primary transition-colors mt-1 line-clamp-2">
