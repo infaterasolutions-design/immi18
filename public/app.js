@@ -569,10 +569,67 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrapper = root.querySelector('.article-content-wrapper');
         const keepReading = root.querySelector('.article-keep-reading');
         const gradient = root.querySelector('.article-gradient');
+        // ── Features Injection (Tags, Related, Sponsored) ──
+        const featuresWrapper = document.createElement('div');
+        featuresWrapper.className = "hidden mt-16 pt-8 border-t border-slate-100 article-features";
+        let featuresHtml = '';
+        
+        // Tags
+        featuresHtml += `<div class="mb-12 flex items-center flex-wrap gap-2"><span class="text-xs font-bold text-slate-500 uppercase tracking-widest mr-2">Suggested Topics:</span> <span class="bg-slate-100 text-slate-700 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-colors cursor-pointer shadow-sm border border-slate-200">#${data.tag}</span></div>`;
+
+        // Related Articles
+        const relCfg = window.AdminConfig?.relatedArticles || { enabled: true, mode: 'auto', manualIds: [] };
+        let rawRelated = [];
+        if (relCfg.enabled) {
+            if (relCfg.mode === 'manual' && relCfg.manualIds?.length > 0) {
+                rawRelated = window.NewsData.filter(a => relCfg.manualIds.includes(a.id)).slice(0, 4);
+            } else {
+                rawRelated = window.NewsData.filter(a => a.id !== data.id && a.category === data.category).sort((a,b)=>b.id-a.id).slice(0, 4);
+            }
+        }
+        if (rawRelated.length > 0) {
+            let sliderHTML = rawRelated.map(r => {
+                const sDesc = (r.content || '').replace(/<[^>]*>?/gm, '').substring(0, 100) + '...';
+                return `<a href="#/article/${r.id}" class="snap-start shrink-0 group border border-slate-200/60 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 w-[85%] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col bg-white">
+                  <div class="aspect-[16/9] w-full relative overflow-hidden bg-slate-100">
+                    <img src="${r.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  </div>
+                  <div class="p-5 flex-grow flex flex-col">
+                    <span class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2">${r.tag}</span>
+                    <h3 class="text-lg font-bold headline-font text-slate-900 group-hover:text-primary transition-colors line-clamp-2 mb-2">${r.title}</h3>
+                    <p class="text-sm text-slate-500 line-clamp-2 mt-auto">${sDesc}</p>
+                  </div>
+                </a>`;
+            }).join('');
+            featuresHtml += `<section class="mb-16"><h2 class="text-2xl font-extrabold headline-font text-slate-900 mb-6 flex items-center gap-3"><span class="w-1.5 h-6 bg-primary inline-block"></span> Related Articles</h2><div class="relative"><div class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-4 hide-scrollbar">${sliderHTML}</div></div></section>`;
+        }
+
+        // Sponsored Content
+        const sponCfg = window.AdminConfig?.sponsoredContent || { enabled: false, items: [] };
+        if (sponCfg.enabled && sponCfg.items && sponCfg.items.length > 0) {
+            let sponHTML = sponCfg.items.slice(0, sponCfg.maxItems || 6).map(item => {
+                return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-white border border-slate-200 p-4 hover:shadow-xl transition-all flex items-center gap-4 relative overflow-hidden h-full rounded-xl">
+                  <div class="w-20 h-20 shrink-0 bg-slate-100 rounded-lg overflow-hidden relative z-10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)]"><img src="${item.image}" alt="${item.sponsor}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/></div>
+                  <div class="flex-1 relative z-10"><h3 class="text-[13px] font-bold text-slate-900 group-hover:text-primary transition-colors line-clamp-2 leading-snug">${item.title}</h3><div class="flex items-center gap-1 mt-2 text-[10px] uppercase tracking-widest text-slate-500"><span class="font-medium">Sponsored by</span><span class="font-bold text-slate-700">${item.sponsor}</span></div></div>
+                </a>`;
+            }).join('');
+            featuresHtml += `<section class="bg-[#f8f9fa] rounded-2xl w-full py-12 px-6 lg:px-12 border border-slate-200/60 shadow-sm mb-12">
+              <div class="flex items-center justify-between mb-8"><h2 class="text-xs font-bold text-slate-400 tracking-widest uppercase flex items-center gap-2"><span class="material-symbols-outlined text-[14px]">campaign</span> Sponsored Content</h2><a href="#" class="text-[10px] uppercase font-bold text-slate-400 hover:text-primary transition-colors cursor-pointer tracking-wider underline underline-offset-2">Advertise Here</a></div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">${sponHTML}</div>
+            </section>`;
+        }
+        featuresWrapper.innerHTML = featuresHtml;
+        root.appendChild(featuresWrapper);
+
         keepReading.querySelector('button').addEventListener('click', () => {
             wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
             gradient.style.opacity = '0';
-            setTimeout(() => { keepReading.remove(); wrapper.style.maxHeight = 'none'; }, 1000);
+            setTimeout(() => { 
+                keepReading.remove(); 
+                wrapper.style.maxHeight = 'none'; 
+                featuresWrapper.classList.remove('hidden');
+                featuresWrapper.classList.add('animate-fadeIn');
+            }, 1000);
             
             // Explicitly set URL when interacting with Keep Reading to guarantee state
             const h = `#/article/${data.id}`;
