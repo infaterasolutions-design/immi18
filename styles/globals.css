@@ -1,0 +1,283 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-family: 'Inter', Arial, sans-serif;
+  color: #0f172a;
+}
+
+          .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+          body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+          .headline-font { font-family: 'Poppins', sans-serif; }
+          .hide-scrollbar::-webkit-scrollbar { display: none; }
+          .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+          /* Force sharp edges globally */
+          *, *::before, *::after { border-radius: 0px !important; }
+          /* Animation for dropdowns */
+          .nav-dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.2s ease-out;
+          }
+          .nav-item:hover .nav-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+          }
+          /* Specific video rounding override - allowed by prompt */
+          .video-card-rounded, .video-card-rounded img { border-radius: 12px !important; }
+          /* Fade-in animation for dropdown stories */
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
+          /* Live Updates Styles */
+          @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+          }
+          .live-dot { animation: livePulse 1.5s ease-in-out infinite; }
+          @keyframes flashHighlight {
+            0% { background-color: rgba(28,78,216,0.12); }
+            100% { background-color: transparent; }
+          }
+          .update-flash { animation: flashHighlight 2.5s ease-out forwards; }
+          .live-timeline-line { position: absolute; left: 19px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #1c4ed8 0%, #e2e8f0 100%); }
+          @media (max-width: 640px) { .live-timeline-line { left: 15px; } }
+
+          /* ══════════════════════════════════════
+             MOBILE RESPONSIVE — max-width: 767px
+             Desktop layout is NOT affected
+             ══════════════════════════════════════ */
+          @media (max-width: 767px) {
+            /* ── Global spacing ── */
+            main { padding-left: 12px !important; padding-right: 12px !important; }
+            body { font-size: 14px; }
+
+            /* ── Nav bar ── */
+            nav .max-w-screen-2xl { padding-left: 12px; padding-right: 12px; }
+            nav .max-w-screen-2xl > .flex { gap: 8px; }
+            /* Hide subscribe button on small phones */
+            @media (max-width: 400px) {
+              nav button.bg-primary { display: none; }
+            }
+
+            /* ── Mobile menu improvements ── */
+            #mobile-menu-overlay { position: fixed; top: 64px; left: 0; right: 0; bottom: 0; background-color: rgba(15, 23, 42, 0.4); z-index: 40; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
+            #mobile-menu-overlay.is-open { opacity: 1; visibility: visible; }
+            
+            #mobile-menu { 
+              position: absolute; top: 100%; left: 0; width: 100%; max-height: calc(100vh - 64px); 
+              transform: translateX(-100%); opacity: 0; visibility: hidden;
+              transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease, visibility 0.4s ease;
+              will-change: transform, opacity;
+            }
+            #mobile-menu.is-open { transform: translateX(0); opacity: 1; visibility: visible; }
+            #mobile-menu .p-4 { padding: 16px 12px; }
+            #mobile-menu a, #mobile-menu button { min-height: 44px; display: flex; align-items: center; padding-top: 10px; padding-bottom: 10px; }
+            
+            .mob-panel { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.35s ease, visibility 0.35s ease; will-change: grid-template-rows, opacity; }
+            .mob-panel.is-open { grid-template-rows: 1fr; opacity: 1; visibility: visible; }
+            .mob-panel-inner { overflow: hidden; }
+            /* ── Premium mobile header icons ── */
+            .mob-icon-btn {
+              position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+              background: linear-gradient(145deg, rgba(255,255,255,0.85), rgba(248,250,252,0.75));
+              backdrop-filter: blur(16px) saturate(1.8); -webkit-backdrop-filter: blur(16px) saturate(1.8);
+              border: 1px solid rgba(226,232,240,0.6);
+              box-shadow:
+                0 2px 8px rgba(0,0,0,0.04),
+                0 4px 16px rgba(0,0,0,0.03),
+                inset 0 1px 0 rgba(255,255,255,0.9),
+                inset 0 -1px 0 rgba(0,0,0,0.02);
+              transition:
+                transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                box-shadow 0.35s ease,
+                background 0.3s ease;
+              border-radius: 13px !important; cursor: pointer; -webkit-tap-highlight-color: transparent;
+              overflow: hidden; isolation: isolate;
+            }
+            /* Ripple effect on tap */
+            .mob-icon-btn::before {
+              content: ''; position: absolute; inset: 0; border-radius: 13px !important;
+              background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), rgba(28,78,216,0.12) 0%, transparent 60%);
+              opacity: 0; transition: opacity 0.4s ease; z-index: 0;
+            }
+            .mob-icon-btn:active::before { opacity: 1; }
+            /* Glow halo */
+            .mob-icon-btn::after {
+              content: ''; position: absolute; inset: -3px; border-radius: 16px !important;
+              background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(99,102,241,0.08), rgba(147,51,234,0.06));
+              opacity: 0; transition: opacity 0.35s ease; z-index: -1;
+              filter: blur(2px);
+            }
+            .mob-icon-btn:active::after { opacity: 1; }
+            /* Tap bounce animation */
+            @keyframes iconBounce {
+              0%   { transform: scale(1); }
+              30%  { transform: scale(0.9); }
+              60%  { transform: scale(1.04); }
+              100% { transform: scale(1); }
+            }
+            .mob-icon-btn:active { animation: iconBounce 0.35s ease forwards; }
+            .mob-icon-btn:hover {
+              box-shadow:
+                0 4px 20px rgba(0,0,0,0.08),
+                0 8px 32px rgba(28,78,216,0.06),
+                inset 0 1px 0 rgba(255,255,255,0.95);
+            }
+
+            /* ── Premium Hamburger bars ── */
+            .hamburger-bars { width: 20px; height: 14px; position: relative; display: flex; flex-direction: column; justify-content: space-between; z-index: 1; }
+            .hamburger-bars span {
+              display: block; height: 2px; background: #334155; border-radius: 3px !important;
+              transition:
+                transform 0.35s cubic-bezier(0.68,-0.6,0.32,1.6),
+                opacity 0.25s ease,
+                width 0.3s cubic-bezier(0.25,0.8,0.25,1),
+                background 0.3s ease;
+              transform-origin: center;
+            }
+            .hamburger-bars span:nth-child(1) { width: 100%; height: 2.2px; }
+            .hamburger-bars span:nth-child(2) { width: 14px; height: 1.8px; transition-delay: 0.05s; }
+            .hamburger-bars span:nth-child(3) { width: 18px; height: 2px; transition-delay: 0.1s; }
+            /* Hover: equalize widths */
+            .mob-icon-btn:hover .hamburger-bars span { width: 100% !important; }
+            /* Morphing to X */
+            .mob-icon-btn.is-active .hamburger-bars span:nth-child(1) {
+              transform: translateY(6px) rotate(45deg); width: 100%; background: #1c4ed8;
+            }
+            .mob-icon-btn.is-active .hamburger-bars span:nth-child(2) { opacity: 0; width: 0; transform: translateX(8px); }
+            .mob-icon-btn.is-active .hamburger-bars span:nth-child(3) {
+              transform: translateY(-6px) rotate(-45deg); width: 100%; background: #1c4ed8;
+            }
+            .mob-icon-btn.is-active {
+              background: linear-gradient(145deg, rgba(241,245,249,0.95), rgba(226,232,240,0.85));
+              box-shadow:
+                0 2px 12px rgba(28,78,216,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            }
+
+            /* ── Premium Search icon SVG ── */
+            .search-icon-svg {
+              width: 20px; height: 20px; stroke: #334155; stroke-width: 1.8;
+              stroke-linecap: round; stroke-linejoin: round; fill: none;
+              transition: stroke 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+              filter: drop-shadow(0 1px 1px rgba(0,0,0,0.06));
+              z-index: 1; position: relative;
+            }
+            .mob-icon-btn:active .search-icon-svg { stroke: #1c4ed8; transform: scale(1.08); filter: drop-shadow(0 0 4px rgba(28,78,216,0.25)); }
+            .mob-icon-btn:hover .search-icon-svg { stroke: #475569; }
+
+            /* ── Hero section ── */
+            .space-y-8 > section:first-of-type h1 { font-size: 1.5rem; line-height: 1.2; }
+            .space-y-8 > section:first-of-type p { font-size: 0.875rem; }
+
+            /* ── Breaking news banner ── */
+            a[href*="/live/"].flex { padding: 8px; gap: 8px; }
+            a[href*="/live/"] p { font-size: 12px; }
+            a[href*="/live/"] .ml-auto { display: none; }
+
+            /* ── Top Stories slider ── */
+            #top-stories-scroll > div { width: 220px !important; }
+            #top-stories-scroll h3 { font-size: 0.8rem; }
+
+            /* ── Video Highlights slider ── */
+            #video-highlights-scroll > div { width: 140px !important; min-width: 140px !important; }
+
+            /* ── Section headings ── */
+            h2.text-xl { font-size: 1rem; }
+
+            /* ── Latest Updates feed items ── */
+            section.grid article.flex { gap: 12px; }
+            section.grid article .w-32 { width: 80px; min-width: 80px; }
+            section.grid article .h-20 { height: 60px; }
+            section.grid article h3.text-lg { font-size: 0.95rem; }
+            section.grid article p.text-sm { font-size: 0.8rem; }
+
+            /* ── Category grid ── */
+            #category-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+            #category-grid a { padding: 12px; }
+
+            /* ── Article view ── */
+            .article-instance .article-title { font-size: 1.5rem !important; line-height: 1.2 !important; }
+            .article-instance .article-body { font-size: 1rem !important; }
+            .article-instance .flex.items-center.gap-4.mb-10 { gap: 12px; margin-bottom: 20px; padding-bottom: 16px; }
+            .article-keep-reading button { padding: 12px 24px; font-size: 10px; }
+
+            /* ── Live updates page ── */
+            #live-view h1 { font-size: 1.35rem !important; line-height: 1.2 !important; }
+            #live-view .flex.items-center.gap-3.mb-5 { gap: 8px; }
+            #live-view .flex.items-center.gap-4.py-2 { flex-wrap: wrap; gap: 6px; padding: 8px; }
+            #live-view .flex.items-center.gap-4.py-2 .ml-auto { margin-left: 0; width: 100%; justify-content: flex-start; margin-top: 4px; }
+            /* Timeline cards */
+            #live-timeline > div { padding-left: 40px !important; }
+            #live-timeline .p-5 { padding: 12px; }
+            #live-timeline h3 { font-size: 0.875rem; }
+            #live-timeline p.text-sm { font-size: 0.8rem; }
+            #live-pinned-updates > div { padding-left: 40px !important; }
+
+            /* ── Sidebar: hide on mobile for cleaner layout ── */
+            section.grid > aside { margin-top: 32px; }
+
+            /* ── Footer ── */
+            footer .grid { gap: 24px !important; }
+            footer .grid > div:first-child img { height: 40px; }
+            footer .flex.gap-4 { gap: 8px; }
+
+            /* ── Buttons: better touch targets ── */
+            button, a.block { min-height: 44px; }
+            #home-load-more, #live-load-more, #load-more-btn { padding: 14px; font-size: 11px; }
+
+            /* ── Cards in category view ── */
+            #category-grid .group h3 { font-size: 0.9rem; }
+
+            /* ── Search results overlay ── */
+            #search-results { width: calc(100vw - 24px) !important; right: -12px !important; }
+
+            /* ── Full-screen Smart Search ── */
+            #smart-search-overlay {
+              position: fixed; inset: 0; z-index: 200;
+              background: rgba(255,255,255,0.97);
+              backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+              opacity: 0; visibility: hidden;
+              transform: translateY(12px);
+              transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s cubic-bezier(0.25,0.8,0.25,1);
+              overflow-y: auto; -webkit-overflow-scrolling: touch;
+            }
+            #smart-search-overlay.is-open {
+              opacity: 1; visibility: visible; transform: translateY(0);
+            }
+            @keyframes skeletonPulse {
+              0%, 100% { opacity: 0.45; }
+              50% { opacity: 0.85; }
+            }
+            .skeleton-bar { background: linear-gradient(90deg, #e2e8f0, #f1f5f9, #e2e8f0); background-size: 200% 100%; animation: skeletonPulse 1.4s ease-in-out infinite; }
+            @keyframes searchResultSlide {
+              from { opacity: 0; transform: translateY(8px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            .search-result-item { animation: searchResultSlide 0.3s ease forwards; }
+            .search-result-item:nth-child(2) { animation-delay: 0.05s; }
+            .search-result-item:nth-child(3) { animation-delay: 0.10s; }
+            .search-result-item:nth-child(4) { animation-delay: 0.15s; }
+            .search-result-item:nth-child(5) { animation-delay: 0.20s; }
+            .search-result-item:nth-child(6) { animation-delay: 0.25s; }
+
+            /* ── Ad slots ── */
+            .pl-12.sm\\:pl-14 .bg-slate-50.border-dashed { padding: 8px; font-size: 9px; }
+          }
+
+          /* ── Tablet adjustments (768–1024px) ── */
+          @media (min-width: 768px) and (max-width: 1024px) {
+            #top-stories-scroll > div { width: 240px !important; }
+            #category-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .article-instance .article-title { font-size: 2rem !important; }
+          }
+        
