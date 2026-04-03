@@ -616,11 +616,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="w-[85px] h-[85px] shrink-0 bg-slate-100 overflow-hidden"><img src="${item.image}" alt="${item.sponsor}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/></div>
                 </a>`;
             }).join('');
-            featuresHtml += `<section class="w-full pb-10 bg-white mb-4">
-              <div class="mb-3 px-1">
-                <h2 class="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>
+            featuresHtml += `<section class="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-[#f5f5f5] py-[50px] mt-8 mb-4 border-y border-slate-200">
+              <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+                <div class="flex justify-between items-center mb-6 px-1">
+                  <h2 class="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>
+                  <a href="#" class="text-[11px] font-bold text-slate-500 hover:text-slate-800 transition-colors uppercase tracking-wider">Advertise Here</a>
+                </div>
+                <div class="bg-white border border-slate-200 py-6 px-4 sm:px-6"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">${sponHTML}</div></div>
               </div>
-              <div class="border border-slate-200 bg-white py-6 px-4 sm:px-6"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">${sponHTML}</div></div>
             </section>`;
         }
         featuresWrapper.innerHTML = featuresHtml;

@@ -138,13 +138,14 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
 
       {/* Sponsored Content (Full Width) */}
       {sponsoredContent?.enabled && sponsoredContent?.items?.length > 0 && (
-        <section className="w-full pb-10 bg-white pt-2 sm:pt-4">
-          <div className="max-w-[1100px] mx-auto px-6">
-            <div className="mb-3 px-1">
+        <section className="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-[#f5f5f5] py-[50px] mt-8 mb-4 border-y border-slate-200">
+          <div className="max-w-[1100px] mx-auto px-4 sm:px-6">
+            <div className="flex justify-between items-center mb-6 px-1">
               <h2 className="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>
+              <a href="#" className="text-[11px] font-bold text-slate-500 hover:text-slate-800 transition-colors uppercase tracking-wider">Advertise Here</a>
             </div>
             
-            <div className="border border-slate-200 bg-white py-6 px-4 sm:px-6">
+            <div className="bg-white border border-slate-200 py-6 px-4 sm:px-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
                 {sponsoredContent.items.slice(0, sponsoredContent.maxItems || 6).map((item) => (
                   <a 
