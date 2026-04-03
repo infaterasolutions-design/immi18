@@ -77,7 +77,7 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
 
         {/* Related Articles Slider */}
         {relatedArticles?.length > 0 && (
-          <section className="w-screen max-w-[1000px] relative left-[50%] -translate-x-[50%] border-t border-slate-200 pt-10 px-4 sm:px-6 mb-2">
+          <section className="border-t border-slate-200 pt-10 mb-2">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl md:text-2xl font-bold headline-font text-slate-900 border-l-4 border-primary pl-4">Related Articles</h2>
               <div className="hidden md:flex gap-2">
@@ -134,12 +134,10 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
             </div>
           </section>
         )}
-      </div>
 
-      {/* Sponsored Content (Full Width) */}
-      {sponsoredContent?.enabled && sponsoredContent?.items?.length > 0 && (
-        <section className="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] pt-[40px] pb-0 border-y border-slate-200 mt-2">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6">
+        {/* Sponsored Content */}
+        {sponsoredContent?.enabled && sponsoredContent?.items?.length > 0 && (
+          <section className="border-t border-slate-200 pt-10 pb-8 mt-2">
             <div className="flex justify-between items-center mb-6 px-1">
               <h2 className="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>
               <a href="#" className="text-[11px] font-bold text-slate-500 hover:text-slate-800 transition-colors uppercase tracking-wider">Advertise Here</a>
@@ -175,9 +173,9 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
                 ))}
               </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )}
+      </div>
     </>
   );
 }
