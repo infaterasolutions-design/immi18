@@ -78,8 +78,8 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
         {/* Related Articles Slider */}
         {relatedArticles?.length > 0 && (
           <section className="border-t border-slate-200 pt-10">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold headline-font text-slate-900">Related Articles</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg md:text-xl font-bold headline-font text-slate-900">Related Articles</h2>
               <div className="hidden md:flex gap-2">
                 <button onClick={scrollLeft} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors">
                   <span className="material-symbols-outlined text-slate-600">chevron_left</span>
@@ -138,18 +138,14 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
 
       {/* Sponsored Content (Full Width) */}
       {sponsoredContent?.enabled && sponsoredContent?.items?.length > 0 && (
-        <section className="w-full py-8 md:py-12 border-t border-slate-200 bg-white">
-          <div className="max-w-screen-lg mx-auto px-6">
-            <div className="flex items-end justify-between mb-3 px-1">
-              <h2 className="text-[18px] md:text-xl font-bold text-slate-800 tracking-tight">Sponsored Content</h2>
-              <div className="flex items-center gap-1.5 pb-1">
-                <span className="text-[11px] font-extrabold text-slate-900 tracking-tight">dianomi</span>
-                <a href="#" className="text-[11px] font-medium text-slate-500 hover:text-slate-800 transition-colors">Advertise Here</a>
-              </div>
+        <section className="w-full pb-10 bg-white pt-2 sm:pt-4">
+          <div className="max-w-[1100px] mx-auto px-6">
+            <div className="mb-3 px-1">
+              <h2 className="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>
             </div>
             
-            <div className="border border-slate-200 bg-white p-5 sm:p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+            <div className="border border-slate-200 bg-white py-6 px-4 sm:px-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
                 {sponsoredContent.items.slice(0, sponsoredContent.maxItems || 6).map((item) => (
                   <a 
                     key={item.id} 

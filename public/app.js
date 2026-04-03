@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                 </a>`;
             }).join('');
-            featuresHtml += `<section class="mb-16"><h2 class="text-2xl font-extrabold headline-font text-slate-900 mb-6 flex items-center gap-3"><span class="w-1.5 h-6 bg-primary inline-block"></span> Related Articles</h2><div class="relative"><div class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-4 hide-scrollbar">${sliderHTML}</div></div></section>`;
+            featuresHtml += `<section class="mb-8"><h2 class="text-lg md:text-xl font-bold headline-font text-slate-900 mb-4 border-l-4 border-primary pl-4">Related Articles</h2><div class="relative"><div class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-2 hide-scrollbar">${sliderHTML}</div></div></section>`;
         }
 
         // Sponsored Content
@@ -616,12 +616,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="w-[85px] h-[85px] shrink-0 bg-slate-100 overflow-hidden"><img src="${item.image}" alt="${item.sponsor}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/></div>
                 </a>`;
             }).join('');
-            featuresHtml += `<section class="w-full py-8 md:py-12 bg-white mt-8 mb-4">
-              <div class="flex items-end justify-between mb-3 px-1">
-                <h2 class="text-[18px] md:text-xl font-bold text-slate-800 tracking-tight">Sponsored Content</h2>
-                <div class="flex items-center gap-1.5 pb-1"><span class="text-[11px] font-extrabold text-slate-900 tracking-tight">dianomi</span><a href="#" class="text-[11px] font-medium text-slate-500 hover:text-slate-800 transition-colors">Advertise Here</a></div>
+            featuresHtml += `<section class="w-full pb-10 bg-white mb-4">
+              <div class="mb-3 px-1">
+                <h2 class="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>
               </div>
-              <div class="border border-slate-200 bg-white p-5 sm:p-8"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">${sponHTML}</div></div>
+              <div class="border border-slate-200 bg-white py-6 px-4 sm:px-6"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">${sponHTML}</div></div>
             </section>`;
         }
         featuresWrapper.innerHTML = featuresHtml;
