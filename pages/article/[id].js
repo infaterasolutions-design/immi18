@@ -40,7 +40,7 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
 
       <div className="max-w-screen-lg mx-auto px-6 py-8">
         {/* Article Header */}
-        <div className="mb-8">
+        <div className="mb-4">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
               {article.category?.replace(/-/g, ' ')}
@@ -51,7 +51,7 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
           <h1 className="text-3xl lg:text-4xl font-bold headline-font text-slate-900 leading-tight mb-4">
             {article.title}
           </h1>
-          <p className="text-sm text-slate-500">{location} • {article.date} at {time}</p>
+          <p className="text-sm text-slate-500 mt-2">{location} • {article.date} at {time}</p>
         </div>
 
         {/* Hero Image */}
@@ -77,37 +77,38 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
 
         {/* Related Articles Slider */}
         {relatedArticles?.length > 0 && (
-          <section className="border-t border-slate-200 pt-10">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg md:text-xl font-bold headline-font text-slate-900">Related Articles</h2>
-              <div className="hidden md:flex gap-2">
-                <button onClick={scrollLeft} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors">
-                  <span className="material-symbols-outlined text-slate-600">chevron_left</span>
-                </button>
-                <button onClick={scrollRight} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors">
-                  <span className="material-symbols-outlined text-slate-600">chevron_right</span>
-                </button>
+          <section className="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-t border-slate-200 pt-10">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg md:text-xl font-bold headline-font text-slate-900 border-l-4 border-primary pl-4">Related Articles</h2>
+                <div className="hidden md:flex gap-2">
+                  <button onClick={scrollLeft} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors">
+                    <span className="material-symbols-outlined text-slate-600">chevron_left</span>
+                  </button>
+                  <button onClick={scrollRight} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-colors">
+                    <span className="material-symbols-outlined text-slate-600">chevron_right</span>
+                  </button>
+                </div>
               </div>
-            </div>
-            
-            <div className="relative">
-              <div 
-                ref={sliderRef}
-                className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-4"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                {/* Hide Webkit Scrollbar CSS */}
-                <style dangerouslySetInnerHTML={{__html: `
-                  div::-webkit-scrollbar { display: none; }
-                `}} />
-                
-                {relatedArticles.map((related) => (
-                  <Link 
-                    key={related.id} 
-                    href={`/article/${related.id}`} 
-                    className="snap-start shrink-0 group border border-slate-200/60 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 w-[85%] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col bg-white"
-                  >
-                    <div className="aspect-[16/9] w-full relative overflow-hidden bg-slate-100">
+              
+              <div className="relative">
+                <div 
+                  ref={sliderRef}
+                  className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-2"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
+                  {/* Hide Webkit Scrollbar CSS */}
+                  <style dangerouslySetInnerHTML={{__html: `
+                    div::-webkit-scrollbar { display: none; }
+                  `}} />
+                  
+                  {relatedArticles.map((related) => (
+                    <Link 
+                      key={related.id} 
+                      href={`/article/${related.id}`} 
+                      className="snap-start shrink-0 group border border-slate-200/60 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 w-[85%] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] lg:w-[calc(33.333%-24px)] min-w-[320px] max-w-[450px] flex flex-col bg-white"
+                    >
+                      <div className="aspect-[16/9] w-full relative overflow-hidden bg-slate-100">
                       <img 
                         src={related.image} 
                         alt={related.title} 
@@ -132,13 +133,14 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
                 ))}
               </div>
             </div>
+            </div>
           </section>
         )}
       </div>
 
       {/* Sponsored Content (Full Width) */}
       {sponsoredContent?.enabled && sponsoredContent?.items?.length > 0 && (
-        <section className="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-[#f5f5f5] py-[50px] mt-8 mb-4 border-y border-slate-200">
+        <section className="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-[#f5f5f5] py-[50px] border-y border-slate-200 mt-2">
           <div className="max-w-[1100px] mx-auto px-4 sm:px-6">
             <div className="flex justify-between items-center mb-6 px-1">
               <h2 className="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>

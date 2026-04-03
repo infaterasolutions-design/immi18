@@ -601,7 +601,12 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                 </a>`;
             }).join('');
-            featuresHtml += `<section class="mb-8"><h2 class="text-lg md:text-xl font-bold headline-font text-slate-900 mb-4 border-l-4 border-primary pl-4">Related Articles</h2><div class="relative"><div class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-2 hide-scrollbar">${sliderHTML}</div></div></section>`;
+            featuresHtml += `<section class="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-t border-slate-200 py-[40px] mt-6 mb-0">
+               <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+                 <h2 class="text-lg md:text-xl font-bold headline-font text-slate-900 mb-4 border-l-4 border-primary pl-4">Related Articles</h2>
+                 <div class="relative"><div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-2 hide-scrollbar">${sliderHTML}</div></div>
+               </div>
+             </section>`;
         }
 
         // Sponsored Content
@@ -616,7 +621,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="w-[85px] h-[85px] shrink-0 bg-slate-100 overflow-hidden"><img src="${item.image}" alt="${item.sponsor}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/></div>
                 </a>`;
             }).join('');
-            featuresHtml += `<section class="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-[#f5f5f5] py-[50px] mt-8 mb-4 border-y border-slate-200">
+            featuresHtml += `<section class="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-[#f5f5f5] py-[50px] border-y border-slate-200 mt-0 mb-4">
               <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
                 <div class="flex justify-between items-center mb-6 px-1">
                   <h2 class="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>
