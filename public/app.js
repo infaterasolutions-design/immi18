@@ -601,12 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                 </a>`;
             }).join('');
-            featuresHtml += `<section class="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-t border-slate-200 py-[40px] mt-6 mb-0">
-               <div class="max-w-[1400px] mx-auto px-4 md:px-8">
-                 <h2 class="text-lg md:text-xl font-bold headline-font text-slate-900 mb-4 border-l-4 border-primary pl-4">Related Articles</h2>
-                 <div class="relative"><div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-2 hide-scrollbar">${sliderHTML}</div></div>
-               </div>
-             </section>`;
+            featuresHtml += `<section class="mb-8"><h2 class="text-lg md:text-xl font-bold headline-font text-slate-900 mb-4 border-l-4 border-primary pl-4">Related Articles</h2><div class="relative"><div class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-2 hide-scrollbar">${sliderHTML}</div></div></section>`;
         }
 
         // Sponsored Content
