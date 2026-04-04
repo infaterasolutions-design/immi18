@@ -38,7 +38,7 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
         <meta property="og:type" content="article" />
       </Head>
 
-      <div className="max-w-screen-lg mx-auto px-6 py-8">
+      <div className="max-w-[1320px] mx-auto px-6 py-8">
         {/* Article Header */}
         <div className="mb-4">
           <div className="flex items-center gap-2 mb-4">
