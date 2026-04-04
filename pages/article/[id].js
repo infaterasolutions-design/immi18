@@ -74,9 +74,7 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
             </span>
           )}
         </div>
-      </div>
 
-      <div className="w-full px-6">
         {/* Related Articles Slider */}
         {relatedArticles?.length > 0 && (
           <section className="border-t border-slate-200 pt-10 mb-2 -mx-6 px-6">
