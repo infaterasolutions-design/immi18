@@ -40,7 +40,7 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
 
       <div className="max-w-[1320px] mx-auto px-6 py-8">
         {/* Article Header */}
-        <div className="mb-4">
+        <div className="mb-4 max-w-3xl mx-auto">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
               {article.category?.replace(/-/g, ' ')}
@@ -59,17 +59,14 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
           <img src={article.image} alt={article.title} className="w-full h-auto max-h-[500px] object-cover" />
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-14 items-start">
-          {/* Main Content Column */}
-          <div className="lg:w-[68%] xl:w-[72%] w-full">
-            {/* Article Body */}
-            <div
-          className="prose prose-slate prose-lg max-w-none mb-16"
+        {/* Article Body */}
+        <div
+          className="prose prose-slate prose-lg max-w-3xl mx-auto mb-16"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
         {/* Suggested Topics Tags */}
-        <div className="mb-16 flex flex-wrap gap-2 items-center">
+        <div className="mb-16 flex flex-wrap gap-2 items-center max-w-3xl mx-auto">
           <span className="text-sm font-bold text-slate-800 mr-2">Suggested Topics:</span>
           {article.tag && (
             <span className="px-4 py-2 bg-slate-100 text-slate-700 text-sm font-medium rounded-full hover:bg-slate-200 cursor-pointer transition-colors">
@@ -138,20 +135,17 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
             </div>
           </section>
         )}
-          </div>
 
-          {/* Right Sidebar Column */}
-          <aside className="lg:w-[32%] xl:w-[28%] w-full sticky top-24 lg:pl-10 lg:border-l border-slate-200">
-            {/* Sponsored Content */}
-            {sponsoredContent?.enabled && sponsoredContent?.items?.length > 0 && (
-              <section className="border-t lg:border-t-0 border-slate-200 pt-10 lg:pt-0 pb-8 mt-2 lg:mt-0 -mx-6 lg:mx-0 px-6 lg:px-0">
+        {/* Sponsored Content */}
+        {sponsoredContent?.enabled && sponsoredContent?.items?.length > 0 && (
+          <section className="border-t border-slate-200 pt-10 pb-8 mt-2 -mx-6 px-6">
             <div className="flex justify-between items-center mb-6 px-1">
               <h2 className="text-[16px] md:text-[18px] font-bold text-slate-700 tracking-tight">Sponsored Content</h2>
               <a href="#" className="text-[11px] font-bold text-slate-500 hover:text-slate-800 transition-colors uppercase tracking-wider">Advertise Here</a>
             </div>
 
-            <div className="bg-white lg:bg-transparent lg:border-none border border-slate-200 py-6 lg:py-0 px-4 sm:px-6 lg:px-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-x-6 gap-y-6">
+            <div className="bg-white border border-slate-200 py-6 px-4 sm:px-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
                 {sponsoredContent.items.slice(0, sponsoredContent.maxItems || 6).map((item) => (
                   <a
                     key={item.id}
@@ -182,8 +176,6 @@ export default function ArticlePage({ article, relatedArticles, sponsoredContent
             </div>
           </section>
         )}
-          </aside>
-        </div>
       </div>
     </>
   );
